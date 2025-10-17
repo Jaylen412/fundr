@@ -103,3 +103,43 @@ Software Engineer II @ JPMorgan Chase
 Graduate Student (AI & Data Science)
 Detroit-native • Climate-Tech • Community Impact Builder
 ```
+
+## 🧠 Example “Why Fund” Insight
+
+```
+“Strong recent customer praise for friendly staff and community engagement; opportunity to improve wait times.”
+
+⚡ Performance & Quota Protection
+
+Each leaderboard request capped at 7 SerpAPI calls
+
+Cached results live for 6 hours
+
+Chain stores auto-filtered (200+ national brands)
+
+Repeated queries = 0–1 API calls
+```
+
+## 🧩 Integrating with Custom GPT
+
+```
+FUNDR’s OpenAPI schema lets you build an interactive Custom GPT.
+
+Example Prompt:
+
+“Find the top small businesses in Atlanta worth funding this quarter.”
+
+GPT Flow:
+
+/discover → Fetch candidates
+
+/leaderboard → Rank + explain “Why Fund”
+
+Output → Contextual leaderboard and AI insights
+```
+
+## 🧭 Vision
+
+```
+FUNDR empowers cities, banks, and communities to invest in small businesses that uplift local economies — using data, not guesswork.
+```

@@ -28,21 +28,21 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import httpx
 from fastapi import Depends, FastAPI, HTTPException, Query
-from pydantic import BaseModel, BaseSettings, Field, validator
+from pydantic import BaseModel, Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# -----------------------------
-# Settings & Constants
-# -----------------------------
 
 class Settings(BaseSettings):
     SERPAPI_API_KEY: str
-    # Optional: city center lat/lng for maps queries (geofencing precision)
-    FUNDR_CITYCENTER_LAT: Optional[float] = None
-    FUNDR_CITYCENTER_LNG: Optional[float] = None
+    FUNDR_CITYCENTER_LAT: float | None = None
+    FUNDR_CITYCENTER_LNG: float | None = None
 
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    # v2-style config replaces the inner Config class
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=True,
+    )
 
 settings = Settings()
 

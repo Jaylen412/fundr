@@ -7,7 +7,7 @@
 
 > **FUNDR** helps banks, investors, and cities discover and fund thriving **small businesses** using real-world data from Google Local and AI-driven analytics.
 
-Built with **FastAPI**, **SerpAPI**, and **ChatGPT**, FUNDR transforms raw Google Maps data into actionable _leaderboards, insights, and impact scores_ — highlighting the local businesses most deserving of funding.
+Built with **FastAPI**, **SerpAPI**, and **ChatGPT**, FUNDR transforms raw Google Local data into actionable _leaderboards, insights, and impact scores_ — highlighting the local businesses most deserving of funding.
 
 ---
 
@@ -127,7 +127,7 @@ FUNDR’s OpenAPI schema lets you build an interactive Custom GPT.
 
 Example Prompt:
 
-“Find the top small businesses in Atlanta worth funding this quarter.”
+“Find the top woman-owned bakeries in Atlanta.”
 
 GPT Flow:
 

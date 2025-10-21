@@ -545,6 +545,13 @@ def recompute_scores() -> Dict[str, Any]:
     SCORE_LAST_UPDATED = datetime.utcnow()
     return {"updated": updated, "as_of": SCORE_LAST_UPDATED.isoformat()}
 
+@app.get("/health", status_code=200)
+def health():
+    """
+    Health check endpoint to verify that the API is running.
+    """
+    return {"status": "ok"}
+
 @app.get("/")
 def root():
     return {
@@ -552,3 +559,4 @@ def root():
         "version": "0.1.0",
         "routes": ["/discover", "/business/{place_id}", "/leaderboard", "/score/recompute"]
     }
+

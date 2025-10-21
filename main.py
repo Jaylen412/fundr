@@ -548,7 +548,10 @@ def recompute_scores() -> Dict[str, Any]:
 @app.get("/health", status_code=200)
 def health():
     """
-    Health check endpoint to verify that the API is running.
+    Health check endpoint.
+
+    Returns HTTP 200 with {"status": "ok"} if the API is running.
+    If the app is down, this endpoint will not respond with HTTP 200.
     """
     return {"status": "ok"}
 
@@ -559,4 +562,3 @@ def root():
         "version": "0.1.0",
         "routes": ["/discover", "/business/{place_id}", "/leaderboard", "/score/recompute"]
     }
-

@@ -407,7 +407,7 @@ def enrich_business_with_reviews(place_id: str):
 def discover(
     city: str = Query(..., description="City, e.g., Detroit"),
     category: str = Query(..., description="Category, e.g., coffee shops"),
-    limit: int = Query(10, ge=1, le=20, description="Number of candidates to return"),
+    limit: int = Query(5, ge=1, le=20, description="Number of candidates to return"),
     exclude_chains: bool = Query(True, description="Filter out obvious national chains"),
 ):
     _serp_calls.set(0)  # reset per request

@@ -1,0 +1,686 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FUNDR API",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "https://fundr-2rje.onrender.com",
+      "description": "small business discovery"
+    }
+  ],
+  "paths": {
+    "/discover": {
+      "get": {
+        "summary": "Discover",
+        "operationId": "discover_discover_get",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "City, e.g., Detroit",
+              "title": "City"
+            },
+            "description": "City, e.g., Detroit"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Category, e.g., coffee shops",
+              "title": "Category"
+            },
+            "description": "Category, e.g., coffee shops"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 20,
+              "minimum": 1,
+              "description": "Number of candidates to return",
+              "default": 5,
+              "title": "Limit"
+            },
+            "description": "Number of candidates to return"
+          },
+          {
+            "name": "exclude_chains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Filter out obvious national chains",
+              "default": true,
+              "title": "Exclude Chains"
+            },
+            "description": "Filter out obvious national chains"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoverResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business/{place_id}": {
+      "get": {
+        "summary": "Business Details",
+        "operationId": "business_details_business__place_id__get",
+        "parameters": [
+          {
+            "name": "place_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Place Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundrItem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/leaderboard": {
+      "get": {
+        "summary": "Leaderboard",
+        "operationId": "leaderboard_leaderboard_get",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "City"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Category"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "require_recent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Require Recent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaderboardResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/score/recompute": {
+      "post": {
+        "summary": "Recompute Scores",
+        "operationId": "recompute_scores_score_recompute_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecomputeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RootResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DiscoverResponse": {
+        "type": "object",
+        "title": "DiscoverResponse",
+        "required": [
+          "city",
+          "category",
+          "count",
+          "items"
+        ],
+        "properties": {
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "items": {
+            "type": "array",
+            "title": "Items",
+            "items": {
+              "$ref": "#/components/schemas/FundrItem"
+            }
+          }
+        }
+      },
+      "FundrItem": {
+        "type": "object",
+        "title": "FundrItem",
+        "required": [
+          "place_id",
+          "name"
+        ],
+        "properties": {
+          "place_id": {
+            "type": "string",
+            "title": "Place Id"
+          },
+          "cid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cid"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "types": {
+            "type": "array",
+            "title": "Types",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address"
+          },
+          "lat": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lat"
+          },
+          "lng": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lng"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "open_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Open State"
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone"
+          },
+          "website": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Website"
+          },
+          "hours": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": true
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hours"
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rating"
+          },
+          "reviews_count": {
+            "type": "integer",
+            "title": "Reviews Count",
+            "default": 0
+          },
+          "is_chain": {
+            "type": "boolean",
+            "title": "Is Chain",
+            "default": false
+          },
+          "flags": {
+            "type": "array",
+            "title": "Flags",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "fundr_score": {
+            "type": "number",
+            "title": "Fundr Score",
+            "default": 0
+          },
+          "subscores": {
+            "$ref": "#/components/schemas/SubScores"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "type": "object",
+        "title": "HTTPValidationError",
+        "properties": {
+          "detail": {
+            "type": "array",
+            "title": "Detail",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "LeaderboardItem": {
+        "type": "object",
+        "title": "LeaderboardItem",
+        "required": [
+          "place_id",
+          "name",
+          "fundr_score",
+          "subscores",
+          "rating",
+          "reviews_count",
+          "price",
+          "open_state"
+        ],
+        "properties": {
+          "place_id": {
+            "type": "string",
+            "title": "Place Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "fundr_score": {
+            "type": "number",
+            "title": "Fundr Score"
+          },
+          "subscores": {
+            "$ref": "#/components/schemas/SubScores"
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rating"
+          },
+          "reviews_count": {
+            "type": "integer",
+            "title": "Reviews Count"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "open_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Open State"
+          },
+          "badges": {
+            "type": "array",
+            "title": "Badges",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "why_fund": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Why Fund"
+          },
+          "top_praise": {
+            "type": "array",
+            "title": "Top Praise",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "top_fix": {
+            "type": "array",
+            "title": "Top Fix",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        }
+      },
+      "LeaderboardResponse": {
+        "type": "object",
+        "title": "LeaderboardResponse",
+        "required": [
+          "city",
+          "category",
+          "updated_at",
+          "items"
+        ],
+        "properties": {
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "items": {
+            "type": "array",
+            "title": "Items",
+            "items": {
+              "$ref": "#/components/schemas/LeaderboardItem"
+            }
+          }
+        }
+      },
+      "SubScores": {
+        "type": "object",
+        "title": "SubScores",
+        "properties": {
+          "quality": {
+            "type": "number",
+            "title": "Quality",
+            "default": 0
+          },
+          "consistency": {
+            "type": "number",
+            "title": "Consistency",
+            "default": 0
+          },
+          "community": {
+            "type": "number",
+            "title": "Community",
+            "default": 0
+          },
+          "ops_fit": {
+            "type": "number",
+            "title": "Ops Fit",
+            "default": 0
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "properties": {
+          "loc": {
+            "type": "array",
+            "title": "Location",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        }
+      },
+      "RecomputeResponse": {
+        "type": "object",
+        "title": "RecomputeResponse",
+        "required": [
+          "updated",
+          "as_of"
+        ],
+        "properties": {
+          "updated": {
+            "type": "integer",
+            "title": "Updated"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          }
+        }
+      },
+      "RootResponse": {
+        "type": "object",
+        "title": "RootResponse",
+        "required": [
+          "name",
+          "version",
+          "routes"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "routes": {
+            "type": "array",
+            "title": "Routes",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -147,7 +147,7 @@ FUNDR empowers cities, banks, and communities to invest in small businesses that
 ```
 python run.py
 
-or (uvicorn direct):
+or uvicorn direct:
 
-uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+uvicorn app.main:app --reload
 ```

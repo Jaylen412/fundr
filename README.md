@@ -145,9 +145,5 @@ FUNDR empowers cities, banks, and communities to invest in small businesses that
 ## 🏃 Running the App
 
 ```
-python run.py
-
-or uvicorn direct:
-
 uvicorn app.main:app --reload
 ```

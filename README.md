@@ -140,6 +140,10 @@ Output → Contextual leaderboard and AI insights
 
 ## 🧭 Vision
 
-```
 FUNDR empowers cities, banks, and communities to invest in small businesses that uplift local economies — using data, not guesswork.
+
+## 🏃 Running the App
+
+```
+uvicorn app.main:app --reload
 ```

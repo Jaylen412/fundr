@@ -70,7 +70,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/DiscoverResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoverResponse"
+                }
               }
             }
           },
@@ -78,7 +80,9 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -94,7 +98,10 @@
             "name": "place_id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string", "title": "Place Id" }
+            "schema": {
+              "type": "string",
+              "title": "Place Id"
+            }
           }
         ],
         "responses": {
@@ -102,7 +109,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/FundrItem" }
+                "schema": {
+                  "$ref": "#/components/schemas/FundrItem"
+                }
               }
             }
           },
@@ -110,7 +119,9 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -126,19 +137,29 @@
             "name": "city",
             "in": "query",
             "required": true,
-            "schema": { "type": "string", "title": "City" }
+            "schema": {
+              "type": "string",
+              "title": "City"
+            }
           },
           {
             "name": "category",
             "in": "query",
             "required": true,
-            "schema": { "type": "string", "title": "Category" }
+            "schema": {
+              "type": "string",
+              "title": "Category"
+            }
           },
           {
             "name": "limit",
             "in": "query",
             "required": false,
-            "schema": { "type": "integer", "default": 10, "title": "Limit" }
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "title": "Limit"
+            }
           },
           {
             "name": "require_recent",
@@ -156,7 +177,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/LeaderboardResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/LeaderboardResponse"
+                }
               }
             }
           },
@@ -164,7 +187,9 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -180,7 +205,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/RecomputeResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/RecomputeResponse"
+                }
               }
             }
           }
@@ -196,7 +223,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/RootResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/RootResponse"
+                }
               }
             }
           }
@@ -209,72 +238,167 @@
       "DiscoverResponse": {
         "type": "object",
         "title": "DiscoverResponse",
-        "required": ["city", "category", "count", "items"],
+        "required": [
+          "city",
+          "category",
+          "count",
+          "items"
+        ],
         "properties": {
-          "city": { "type": "string", "title": "City" },
-          "category": { "type": "string", "title": "Category" },
-          "count": { "type": "integer", "title": "Count" },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
           "items": {
             "type": "array",
             "title": "Items",
-            "items": { "$ref": "#/components/schemas/FundrItem" }
+            "items": {
+              "$ref": "#/components/schemas/FundrItem"
+            }
           }
         }
       },
       "FundrItem": {
         "type": "object",
         "title": "FundrItem",
-        "required": ["place_id", "name"],
+        "required": [
+          "place_id",
+          "name"
+        ],
         "properties": {
-          "place_id": { "type": "string", "title": "Place Id" },
+          "place_id": {
+            "type": "string",
+            "title": "Place Id"
+          },
           "cid": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Cid"
           },
-          "name": { "type": "string", "title": "Name" },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
           "types": {
             "type": "array",
             "title": "Types",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "default": []
           },
           "address": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Address"
           },
           "lat": {
-            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Lat"
           },
           "lng": {
-            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Lng"
           },
           "price": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Price"
           },
           "open_state": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Open State"
           },
           "phone": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Phone"
           },
           "website": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Website"
           },
           "hours": {
             "anyOf": [
-              { "type": "object", "additionalProperties": true },
-              { "type": "null" }
+              {
+                "type": "object",
+                "additionalProperties": true
+              },
+              {
+                "type": "null"
+              }
             ],
             "title": "Hours"
           },
           "rating": {
-            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Rating"
           },
           "reviews_count": {
@@ -290,7 +414,9 @@
           "flags": {
             "type": "array",
             "title": "Flags",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "default": []
           },
           "fundr_score": {
@@ -298,7 +424,9 @@
             "title": "Fundr Score",
             "default": 0
           },
-          "subscores": { "$ref": "#/components/schemas/SubScores" }
+          "subscores": {
+            "$ref": "#/components/schemas/SubScores"
+          }
         }
       },
       "HTTPValidationError": {
@@ -308,7 +436,9 @@
           "detail": {
             "type": "array",
             "title": "Detail",
-            "items": { "$ref": "#/components/schemas/ValidationError" }
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
           }
         }
       },
@@ -326,43 +456,91 @@
           "open_state"
         ],
         "properties": {
-          "place_id": { "type": "string", "title": "Place Id" },
-          "name": { "type": "string", "title": "Name" },
-          "fundr_score": { "type": "number", "title": "Fundr Score" },
-          "subscores": { "$ref": "#/components/schemas/SubScores" },
+          "place_id": {
+            "type": "string",
+            "title": "Place Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "fundr_score": {
+            "type": "number",
+            "title": "Fundr Score"
+          },
+          "subscores": {
+            "$ref": "#/components/schemas/SubScores"
+          },
           "rating": {
-            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Rating"
           },
-          "reviews_count": { "type": "integer", "title": "Reviews Count" },
+          "reviews_count": {
+            "type": "integer",
+            "title": "Reviews Count"
+          },
           "price": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Price"
           },
           "open_state": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Open State"
           },
           "badges": {
             "type": "array",
             "title": "Badges",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "default": []
           },
           "why_fund": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Why Fund"
           },
           "top_praise": {
             "type": "array",
             "title": "Top Praise",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "default": []
           },
           "top_fix": {
             "type": "array",
             "title": "Top Fix",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "default": []
           }
         }
@@ -370,10 +548,21 @@
       "LeaderboardResponse": {
         "type": "object",
         "title": "LeaderboardResponse",
-        "required": ["city", "category", "updated_at", "items"],
+        "required": [
+          "city",
+          "category",
+          "updated_at",
+          "items"
+        ],
         "properties": {
-          "city": { "type": "string", "title": "City" },
-          "category": { "type": "string", "title": "Category" },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
           "updated_at": {
             "type": "string",
             "format": "date-time",
@@ -382,7 +571,9 @@
           "items": {
             "type": "array",
             "title": "Items",
-            "items": { "$ref": "#/components/schemas/LeaderboardItem" }
+            "items": {
+              "$ref": "#/components/schemas/LeaderboardItem"
+            }
           }
         }
       },
@@ -390,50 +581,103 @@
         "type": "object",
         "title": "SubScores",
         "properties": {
-          "quality": { "type": "number", "title": "Quality", "default": 0 },
+          "quality": {
+            "type": "number",
+            "title": "Quality",
+            "default": 0
+          },
           "consistency": {
             "type": "number",
             "title": "Consistency",
             "default": 0
           },
-          "community": { "type": "number", "title": "Community", "default": 0 },
-          "ops_fit": { "type": "number", "title": "Ops Fit", "default": 0 }
+          "community": {
+            "type": "number",
+            "title": "Community",
+            "default": 0
+          },
+          "ops_fit": {
+            "type": "number",
+            "title": "Ops Fit",
+            "default": 0
+          }
         }
       },
       "ValidationError": {
         "type": "object",
         "title": "ValidationError",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "properties": {
           "loc": {
             "type": "array",
             "title": "Location",
-            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] }
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
           },
-          "msg": { "type": "string", "title": "Message" },
-          "type": { "type": "string", "title": "Error Type" }
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
         }
       },
       "RecomputeResponse": {
         "type": "object",
         "title": "RecomputeResponse",
-        "required": ["updated", "as_of"],
+        "required": [
+          "updated",
+          "as_of"
+        ],
         "properties": {
-          "updated": { "type": "integer", "title": "Updated" },
-          "as_of": { "type": "string", "format": "date-time", "title": "As Of" }
+          "updated": {
+            "type": "integer",
+            "title": "Updated"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          }
         }
       },
       "RootResponse": {
         "type": "object",
         "title": "RootResponse",
-        "required": ["name", "version", "routes"],
+        "required": [
+          "name",
+          "version",
+          "routes"
+        ],
         "properties": {
-          "name": { "type": "string", "title": "Name" },
-          "version": { "type": "string", "title": "Version" },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
           "routes": {
             "type": "array",
             "title": "Routes",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
